@@ -1,73 +1,74 @@
 #include "../include/dynamic_array.h"
+
 #include <stdio.h>
 #include <stdlib.h>
 
-struct DA {
-  int size;
-  int elements;
-  int *array;
+struct DynamicArray {
+    int size;
+    int numOfElements;
+    int *array;
 };
 
-struct DA *createDynamicArray(void) {
-  struct DA *da = malloc(sizeof(*da));
+struct DynamicArray *createDynamicArray(void) {
+    struct DynamicArray *dynamicArray = malloc(sizeof(*dynamicArray));
 
-  if (da == NULL) {
-    fprintf(stderr, "Error while creating dynamic array");
-    exit(EXIT_FAILURE);
-  } else {
-    da->size = 1;
-    da->elements = 0;
-    da->array = malloc(sizeof(int));
-  }
+    if (dynamicArray == NULL) {
+        fprintf(stderr, "Error while creating dynamic array");
+        exit(EXIT_FAILURE);
+    } else {
+        dynamicArray->size = 1;
+        dynamicArray->numOfElements = 0;
+        dynamicArray->array = malloc(sizeof(int));
+    }
 
-  return da;
+    return dynamicArray;
 }
 
-void growArray(struct DA *da) {
-  int *newArray = realloc(da->array, (da->size * 2) * sizeof(int));
+static void growArray(struct DynamicArray *dynamicArray) {
+    int *newArray = realloc(dynamicArray->array, (dynamicArray->size * 2) * sizeof(int));
 
-  if (newArray == NULL) {
-    fprintf(stderr, "Error while growing dynamic array");
-    exit(EXIT_FAILURE);
-  } else {
-    da->array = newArray;
-    da->size *= 2;
-  }
+    if (newArray == NULL) {
+        fprintf(stderr, "Error while growing dynamic array");
+        exit(EXIT_FAILURE);
+    } else {
+        dynamicArray->array = newArray;
+        dynamicArray->size *= 2;
+    }
 }
 
-void shrinkArray(struct DA *da) {
-  int *newArray = realloc(da->array, (da->size / 2) * sizeof(int));
+static void shrinkArray(struct DynamicArray *dynamicArray) {
+    int *newArray = realloc(dynamicArray->array, (dynamicArray->size / 2) * sizeof(int));
 
-  if (newArray == NULL) {
-    fprintf(stderr, "Error while shrinking dynamic array");
-    exit(EXIT_FAILURE);
-  } else {
-    da->array = newArray;
-    da->size /= 2;
-  }
+    if (newArray == NULL) {
+        fprintf(stderr, "Error while shrinking dynamic array");
+        exit(EXIT_FAILURE);
+    } else {
+        dynamicArray->array = newArray;
+        dynamicArray->size /= 2;
+    }
 }
 
-void push(struct DA *da, int data) {
-  if (da->elements == da->size) {
-    growArray(da);
-  }
+void push(struct DynamicArray *dynamicArray, int data) {
+    if (dynamicArray->numOfElements == dynamicArray->size) {
+        growArray(dynamicArray);
+    }
 
-  da->array[da->elements++] = data;
+    dynamicArray->array[dynamicArray->numOfElements++] = data;
 }
 
-void pop(struct DA *da) {
-  if (da->elements >= 1) {
-    da->array[--da->elements] = 0;
-  }
+void pop(struct DynamicArray *dynamicArray) {
+    if (dynamicArray->numOfElements >= 1) {
+        dynamicArray->array[--dynamicArray->numOfElements] = 0;
+    }
 
-  if (da->elements == (da->size / 2) && da->size > 1) {
-    shrinkArray(da);
-  }
+    if (dynamicArray->numOfElements == (dynamicArray->size / 2) && dynamicArray->size > 1) {
+        shrinkArray(dynamicArray);
+    }
 }
 
-void destroyDynamicArray(struct DA *da) {
-  if (da) {
-    free(da->array);
-    free(da);
-  }
+void destroyDynamicArray(struct DynamicArray *dynamicArray) {
+    if (dynamicArray) {
+        free(dynamicArray->array);
+        free(dynamicArray);
+    }
 }

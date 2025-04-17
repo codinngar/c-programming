@@ -1,15 +1,18 @@
-#include "../include/binary_search.h"
 #include <stdio.h>
 
-int main(void)
-{
-    int array[] = {1, 2, 3, 4};
-    size_t size = 4;
-    int target = 3;
+#include "../include/merge_sort.h"
 
-    int index = binarySearch(array, size, target);
+int main(void) {
+    int array[] = {4, 12, 8, 90, 5, 3, 2, 68, 3};
+    int size = sizeof(array) / sizeof(array[0]);
 
-    printf("%d\n", index);
+    for (int i = 0; i < size; i++) printf("%d ", array[i]);
+    printf("\n");
+
+    mergeSort(array, size);
+
+    for (int i = 0; i < size; i++) printf("%d ", array[i]);
+    printf("\n");
 
     return 0;
 }

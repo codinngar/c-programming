@@ -1,20 +1,21 @@
+#include "../include/static_array.h"
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "static_array.h"
 
-int* createStaticArray(size_t size) {
-    int *sa = malloc(size * sizeof(*sa));
-    
-    if (sa == NULL) {
+int *createStaticArray(int size) {
+    int *staticArray = malloc(size * sizeof(*staticArray));
+
+    if (staticArray == NULL) {
         fprintf(stderr, "Error while creating static array");
         exit(EXIT_FAILURE);
     }
-    
-    return sa;
+
+    return staticArray;
 }
 
-void destroyStaticArray(int *sa) {
-    if (sa) {
-        free(sa);
+void destroyStaticArray(int *staticArray) {
+    if (staticArray) {
+        free(staticArray);
     }
 }

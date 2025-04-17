@@ -1,11 +1,11 @@
 #ifndef DYNAMIC_ARRAY_H
 #define DYNAMIC_ARRAY_H
 
-struct DA;
+struct DynamicArray;
 
-struct DA* createDynamicArray(void);
-void push(struct DA *da, int data);
-void pop(struct DA *da);
-void destroyDynamicArray(struct DA * da);
+struct DynamicArray *createDynamicArray(void);
+void push(struct DynamicArray *dynamicArray, int data);
+void pop(struct DynamicArray *dynamicArray);
+void destroyDynamicArray(struct DynamicArray *dynamicArray);
 
 #endif
