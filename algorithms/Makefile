@@ -10,5 +10,3 @@ all:
 run:
 	./build/app
 
-clean:
- 	rm -f $(TARGET)

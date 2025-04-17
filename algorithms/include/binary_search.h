@@ -1,6 +1,6 @@
 #ifndef BINARY_SEARCH_H
 #define BINARY_SEARCH_H
 
-int binarySearch(int array[], size_t size, int target);
+int binarySearch(int array[], int size, int target);
 
 #endif
